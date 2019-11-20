@@ -6,6 +6,7 @@ namespace JhonnySe.Controllers
     {
         public IActionResult Index()
         {
+            ViewData["Title"] = "Jhonny.se";
             return View();
         }
     }
