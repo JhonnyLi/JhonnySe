@@ -10,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		JhonnySeCodeCleanup.ruleset = JhonnySeCodeCleanup.ruleset
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JhonnySe.Test", "JhonnySe.Test\JhonnySe.Test.csproj", "{E54BF9B3-99BA-485D-AEF6-52EC4BC13825}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +22,10 @@ Global
 		{C099CA2D-2AE2-4362-A54F-BB909E0CDD01}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C099CA2D-2AE2-4362-A54F-BB909E0CDD01}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C099CA2D-2AE2-4362-A54F-BB909E0CDD01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E54BF9B3-99BA-485D-AEF6-52EC4BC13825}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E54BF9B3-99BA-485D-AEF6-52EC4BC13825}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E54BF9B3-99BA-485D-AEF6-52EC4BC13825}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E54BF9B3-99BA-485D-AEF6-52EC4BC13825}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
