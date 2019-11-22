@@ -17,6 +17,18 @@ namespace JhonnySe.Repositorys
             _secretClient = new SecretClient(uri, new DefaultAzureCredential());
         }
 
+        public async Task<string> GetSecretAsync(string keyName)
+        {
+            var secret = await _secretClient.GetSecretAsync(keyName).ConfigureAwait(false) ?? throw new ArgumentNullException();
+            return secret.Value.ToString();
+        }
+
+        public string GetSecret(string keyName)
+        {
+            var secret = _secretClient.GetSecret(keyName) ?? throw new ArgumentNullException();
+            return secret.Value.Value.ToString();
+        }
+
         private Uri InitializeKeyVault()
         {
             string keyVaultName = Environment.GetEnvironmentVariable("KEY_VAULT_NAME", EnvironmentVariableTarget.User);
