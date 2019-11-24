@@ -1,5 +1,6 @@
 ﻿using Azure.Identity;
 using Azure.Security.KeyVault.Secrets;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +11,23 @@ namespace JhonnySe.Repositorys
     public class SecretsRepository : ISecretsRepository
     {
         private readonly SecretClient _secretClient;
+        private readonly ILogger _logger;
 
-        public SecretsRepository()
+        public SecretsRepository(ILogger<ISecretsRepository> logger)
         {
-            var uri = InitializeKeyVault();
-            _secretClient = new SecretClient(uri, new DefaultAzureCredential());
+            _logger = logger;
+            try
+            {
+                var uri = InitializeKeyVault();
+                _logger.LogInformation("Getting information from key-vault");
+                _secretClient = new SecretClient(uri, new DefaultAzureCredential());
+            }
+            catch (Exception ex)
+            {
+                _logger.LogDebug(ex, "Coult not connect to key-vault");
+                _logger = null;
+                _secretClient = null;
+            }
         }
 
         public async Task<string> GetSecretAsync(string keyName)
@@ -25,8 +38,16 @@ namespace JhonnySe.Repositorys
 
         public string GetSecret(string keyName)
         {
-            var secret = _secretClient.GetSecret(keyName) ?? throw new ArgumentNullException();
-            return secret.Value.Value.ToString();
+            try
+            {
+                var secret = _secretClient.GetSecret(keyName);
+                return secret.Value.Value.ToString();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Could not get secrets from vault.");
+                throw ex;
+            }
         }
 
         private Uri InitializeKeyVault()
