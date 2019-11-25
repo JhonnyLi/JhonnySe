@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
-    <AspNetCoreModuleName>AspNetCoreModule</AspNetCoreModuleName>
+    <AspNetCoreModuleName>AspNetCoreModuleV3</AspNetCoreModuleName>
     <ApplicationInsightsResourceId>/subscriptions/d7f3e4a1-bd51-41b4-ba0d-10ba158bc113/resourcegroups/JhonnySe/providers/microsoft.insights/components/JhonnySe</ApplicationInsightsResourceId>
   </PropertyGroup>
 
