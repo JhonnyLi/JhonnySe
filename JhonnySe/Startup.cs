@@ -22,7 +22,7 @@ namespace JhonnySe
             services.AddApplicationInsightsTelemetry();
             services.AddControllersWithViews();
 
-            services.AddSingleton<ISecretsRepository, SecretsRepository>();
+            //services.AddSingleton<ISecretsRepository, SecretsRepository>();
             //services.AddScoped<IGitHubRepository, GitHubRepository>();
         }
 
