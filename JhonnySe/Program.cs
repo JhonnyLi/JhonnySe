@@ -42,8 +42,8 @@ namespace JhonnySe
                 {
                     logging.ClearProviders();
                     logging.AddConfiguration(context.Configuration.GetSection("Logging"));
-                    logging.AddDebug();
-                    logging.AddConsole();
+                    //logging.AddDebug();
+                    //logging.AddConsole();
                     logging.AddApplicationInsights(context.Configuration.GetSection("ApplicationInsights").GetSection("InstrumentationKey").Value);
                 })
                 .ConfigureWebHostDefaults(webBuilder =>
