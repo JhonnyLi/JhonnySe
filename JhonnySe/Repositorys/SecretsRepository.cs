@@ -1,52 +1,72 @@
 ﻿using Azure.Identity;
 using Azure.Security.KeyVault.Secrets;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Azure.KeyVault;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace JhonnySe.Repositorys
 {
     public class SecretsRepository : ISecretsRepository
     {
-        private readonly SecretClient _secretClient;
-        private readonly ILogger _logger;
 
-        public SecretsRepository(ILogger<ISecretsRepository> logger)
+        private readonly ILogger _logger;
+        private readonly SecretClient _secretClient;
+        private readonly IKeyVaultClient _liveClient;
+        private readonly IHostEnvironment _env;
+
+        public SecretsRepository(ILogger<ISecretsRepository> logger, IKeyVaultClient client, IHostEnvironment env)
         {
+            _env = env;
             _logger = logger;
-            try
+            _logger.LogInformation("Initializing key vault");
+            if (_env.IsProduction())
             {
-                var uri = InitializeKeyVault();
-                _logger.LogInformation("Getting information from key-vault");
-                _secretClient = new SecretClient(uri, new DefaultAzureCredential());
+                _liveClient = client;
             }
-            catch (Exception ex)
+            else
             {
-                _logger.LogDebug(ex, "Coult not connect to key-vault");
-                _logger = null;
-                _secretClient = null;
+                try
+                {
+                    var uri = InitializeKeyVault();
+                    _secretClient = new SecretClient(uri, new DefaultAzureCredential());
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogDebug(ex, "Coult not connect to key-vault");
+                    _logger = null;
+                    _secretClient = null;
+                }
             }
         }
 
         public async Task<string> GetSecretAsync(string keyName)
         {
-            var secret = await _secretClient.GetSecretAsync(keyName).ConfigureAwait(false) ?? throw new ArgumentNullException();
-            return secret.Value.ToString();
+            if (_env.IsProduction())
+            {
+                var secret = await _liveClient.GetSecretAsync(keyName);
+                return secret.Value.ToString();
+            }
+            else
+            {
+                var secret = await _secretClient.GetSecretAsync(keyName);
+                return secret.Value.ToString();
+            }
         }
 
         public string GetSecret(string keyName)
         {
-            try
+            if (_env.IsProduction())
+            {
+                var secret = _liveClient.GetSecretAsync(keyName).Result;
+                return secret.Value.ToString();
+            }
+            else
             {
                 var secret = _secretClient.GetSecret(keyName);
-                return secret.Value.Value.ToString();
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Could not get secrets from vault.");
-                throw ex;
+                return secret.Value.ToString();
             }
         }
 
