@@ -1,7 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
+    <AspNetCoreHostingModel>OutOfProcess</AspNetCoreHostingModel>
+    <AspNetCoreModuleName>AspNetCoreModule</AspNetCoreModuleName>
     <ApplicationInsightsResourceId>/subscriptions/d7f3e4a1-bd51-41b4-ba0d-10ba158bc113/resourcegroups/JhonnySe/providers/microsoft.insights/components/JhonnySe</ApplicationInsightsResourceId>
   </PropertyGroup>
 
