@@ -22,8 +22,8 @@ namespace JhonnySe
             services.AddApplicationInsightsTelemetry();
             services.AddControllersWithViews();
 
-            //services.AddSingleton<ISecretsRepository, SecretsRepository>();
-            //services.AddScoped<IGitHubRepository, GitHubRepository>();
+            services.AddSingleton<ISecretsRepository, SecretsRepository>();
+            services.AddScoped<IGitHubRepository, GitHubRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
