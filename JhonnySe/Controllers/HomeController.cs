@@ -25,7 +25,7 @@ namespace JhonnySe.Controllers
         private async Task<MainViewModel> GetViewModel()
         {
             var user = await _gitHub.GetUser("JhonnyLi").ConfigureAwait(false);
-            var result = await _gitHub.GetReposFromUser("JhonnyLi").ConfigureAwait(false);
+            var result = await _gitHub.GetReposFromUser(user).ConfigureAwait(false);
             var model = new MainViewModel();
             model.avatar_url = user.avatar_url;
             model.OwnerName = user.name;

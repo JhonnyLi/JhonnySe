@@ -24,9 +24,9 @@ namespace JhonnySe.Repositorys
             _client = GetClient();
         }
 
-        public async Task<List<Repository>> GetReposFromUser(string user)
+        public async Task<List<Repository>> GetReposFromUser(GitHubUser user)
         {
-            var uri = new Uri($"https://api.github.com/users/{user}/repos");
+            var uri = new Uri(user.repos_url);
             var response = await _client.GetAsync(uri).ConfigureAwait(false);
             var contentString = await response.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<List<Repository>>(contentString);
