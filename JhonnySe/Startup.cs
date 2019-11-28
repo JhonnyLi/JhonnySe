@@ -19,10 +19,11 @@ namespace JhonnySe
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
             services.AddApplicationInsightsTelemetry();
+            services.AddControllersWithViews();
 
             services.AddSingleton<ISecretsRepository, SecretsRepository>();
+            services.AddScoped<IGitHubRepository, GitHubRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

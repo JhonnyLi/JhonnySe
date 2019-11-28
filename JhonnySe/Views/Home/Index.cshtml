@@ -1,7 +1,31 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model JhonnySe.Models.GitHub.MainViewModel
 @{
 }
+<body style="width:100vw;height:100vh;">
+    <H1>@Model.OwnerName</H1>
+        <div style="width:30%; display:inline-block;"><img src="@Model.avatar_url" /></div>
 
-<h1>@ViewData["Title"]</h1>
+        <div style="width:70%; display:inline-block;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Created</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var repo in Model.Repositorys)
+                    {
+                        <tr>
+                            <td>@repo.Name</td>
+                            <td>@repo.CreatedDate.ToShortDateString()</td>
+                            <td>@repo.Description</td>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div style="width:49.5%; display:inline-block;"><a href="@Model.GitHubUrl">GitHub Profile</a></div>
+</body>
