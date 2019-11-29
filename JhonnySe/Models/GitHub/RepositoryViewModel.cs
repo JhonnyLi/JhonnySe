@@ -6,6 +6,7 @@ namespace JhonnySe.Models.GitHub
     {
         public string Name { get; set; }
         public DateTime CreatedDate { get; set; }
+        public DateTime UpdatedAt { get; set; }
         public string Description { get; set; }
     }
 }

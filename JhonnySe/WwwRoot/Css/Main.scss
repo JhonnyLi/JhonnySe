@@ -1,11 +1,17 @@
 ﻿body {
-    width: 90vw;
-    height: 90vh;
+    width: 100vw;
+    height: 100vh;
+    Margin: 0;
 
     div div#avatar {
-        width:30%;
-        display:inline-block;
-        background-repeat:no-repeat;
-        background-size:cover;
+        display: inline-block;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+
+        img {
+            opacity:0;
+            width:250px;
+        }
     }
 }

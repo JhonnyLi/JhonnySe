@@ -30,7 +30,12 @@ namespace JhonnySe.Controllers
             model.avatar_url = user.avatar_url;
             model.OwnerName = user.name;
             model.GitHubUrl = user.html_url;
-            model.Repositorys = result.Select(r => new RepositoryViewModel { Name = r.name, CreatedDate = r.created_at, Description = r.description }).OrderByDescending(d => d.CreatedDate).ToList();
+            model.Repositorys = result.Select(r => new RepositoryViewModel { 
+                Name = r.name, 
+                CreatedDate = r.created_at, 
+                Description = r.description, 
+                UpdatedAt = r.updated_at })
+                .OrderByDescending(d => d.UpdatedAt).ToList();
 
             return model;
         }
