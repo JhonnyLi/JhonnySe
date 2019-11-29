@@ -11,9 +11,11 @@ namespace JhonnySe.Controllers
     public class HomeController : Controller
     {
         readonly IGitHubRepository _gitHub;
-        public HomeController(IGitHubRepository gitHubRepo)
+        readonly ILinkedinRepository _linkedIn;
+        public HomeController(IGitHubRepository gitHubRepo, ILinkedinRepository linkedIn)
         {
             _gitHub = gitHubRepo;
+            _linkedIn = linkedIn;
         }
         public async Task<IActionResult> Index()
         {
@@ -30,6 +32,7 @@ namespace JhonnySe.Controllers
             model.avatar_url = user.avatar_url;
             model.OwnerName = user.name;
             model.GitHubUrl = user.html_url;
+            model.LinkedInUrl = _linkedIn.GetLinkedInProfileLink();
             model.Repositorys = result.Select(r => new RepositoryViewModel { 
                 Name = r.name, 
                 CreatedDate = r.created_at, 

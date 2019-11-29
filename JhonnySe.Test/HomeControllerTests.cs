@@ -22,7 +22,10 @@ namespace JhonnySe.Test
             mockGithubRepo.Setup(u => u.GetUser("JhonnyLi")).Returns(Task.FromResult(mockUser));
             mockGithubRepo.Setup(r => r.GetReposFromUser(mockUser)).Returns(Task.FromResult(mockRepoList));
 
-            var controller = new HomeController(mockGithubRepo.Object);
+            var mockLinkedInRepo = new Mock<ILinkedinRepository>();
+            mockLinkedInRepo.Setup(l => l.GetLinkedInProfileLink()).Returns("");
+
+            var controller = new HomeController(mockGithubRepo.Object, mockLinkedInRepo.Object);
 
             //Act
             var result = await controller.Index();

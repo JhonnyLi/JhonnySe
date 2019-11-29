@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 
 namespace JhonnySe.Repositorys
 {
-    interface ILinkedinRepository
+    public interface ILinkedinRepository
     {
+        string GetLinkedInProfileLink();
     }
 }
