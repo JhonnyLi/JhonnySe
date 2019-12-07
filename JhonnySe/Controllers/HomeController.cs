@@ -20,7 +20,7 @@ namespace JhonnySe.Controllers
         public async Task<IActionResult> Index()
         {
             var model = await GetViewModel();
-            
+           model.OauthCode = await _linkedIn.GetAuthToken();
             return View(model);
         }
 

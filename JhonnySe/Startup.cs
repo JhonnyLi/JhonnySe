@@ -1,4 +1,5 @@
 using JhonnySe.Repositorys;
+using JhonnySe.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -22,8 +23,10 @@ namespace JhonnySe
             services.AddApplicationInsightsTelemetry();
             services.AddControllersWithViews();
 
+            services.AddScoped<IHttpClientService, HttpClientService>();
             services.AddSingleton<ISecretsRepository, SecretsRepository>();
             services.AddScoped<IGitHubRepository, GitHubRepository>();
+            services.AddScoped<ILinkedinRepository, LinkedinRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
