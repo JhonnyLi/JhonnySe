@@ -1,8 +1,6 @@
 ﻿using JhonnySe.Models.GitHub;
 using JhonnySe.Repositorys;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json.Linq;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,16 +10,26 @@ namespace JhonnySe.Controllers
     {
         readonly IGitHubRepository _gitHub;
         readonly ILinkedinRepository _linkedIn;
-        public HomeController(IGitHubRepository gitHubRepo, ILinkedinRepository linkedIn)
+        readonly IBlobStorageClient _storage;
+        public HomeController(IGitHubRepository gitHubRepo, ILinkedinRepository linkedIn, IBlobStorageClient storage)
         {
             _gitHub = gitHubRepo;
             _linkedIn = linkedIn;
+            _storage = storage;
         }
         public async Task<IActionResult> Index()
         {
             var model = await GetViewModel();
-           model.OauthCode = await _linkedIn.GetAuthToken();
+            var content = BlobStorageClient.CreateMemoryStreamFromObject<MainViewModel>(model);
+            //await _storage.UploadStream("Test", content);
+            //model = null;
+            //model = _storage.GetBlob<MainViewModel>();
             return View(model);
+        }
+        [HttpGet]
+        public IActionResult ValidationEndpoint(string challengeCode)
+        {
+            return Ok("");
         }
 
         private async Task<MainViewModel> GetViewModel()
