@@ -1,7 +1,5 @@
 ﻿using JhonnySe.Models.GitHub;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-//using Octokit;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;

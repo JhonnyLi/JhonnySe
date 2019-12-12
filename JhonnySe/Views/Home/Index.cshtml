@@ -1,33 +1,22 @@
-﻿@model JhonnySe.Models.GitHub.MainViewModel
 @{
-    ViewData["Title"] = "Jhonny.se";
     Layout = "~/Views/_Layout.cshtml";
 }
-<script>
-    var logoUrl = @Json.Serialize(Model.avatar_url);
-    console.log(logoUrl);
-</script>
-<H1>@Model.OwnerName</H1>
-<div id="avatar" style="background-image:url(@Model.avatar_url)"><img src="@Model.avatar_url"/></div>
-<div style="width:70%; display:inline-block;">
-    <table>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Created</th>
-                <th>Description</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var repo in Model.Repositorys)
-            {
-                <tr>
-                    <td>@repo.Name</td>
-                    <td>@repo.CreatedDate.ToShortDateString()</td>
-                    <td>@repo.Description</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+
+<div class="container">
+    <div id="avatar" style="background-image:url({{model.avatar_url}})">
+        <H1>{{model.ownerName}}</H1>
+    </div>
 </div>
-<div style="width:49.5%; display:inline-block;"><a href="@Model.GitHubUrl">GitHub Profile</a></div>
+
+<div class="row">
+    <div class="card col-sm-3 m-3 p-3" ng-repeat="repos in model.repositorys | orderBy:'-updatedAt'">
+        <img alt="GitHub last commit" class="card-img-top" src="https://img.shields.io/github/last-commit/jhonnyli/{{repos.name}}">
+        <div class="card-body">
+            <h5 class="card-title">{{repos.name}} ({{repos.createdDate}})</h5>
+            <p class="card-text">{{repos.description}}</p>
+            <p></p>
+            <a href="#" class="btn btn-primary">Go to repo...</a>
+        </div>
+    </div>
+</div>
+<div style="width:49.5%; display:inline-block;"><a href="{{model.gitHubUrl}}">GitHub Profile</a></div>

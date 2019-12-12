@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace JhonnySe.Models.GitHub
 {
-
     public class RepositorysArray
     {
         public Repository[] Repositorys { get; set; }
@@ -87,7 +83,6 @@ namespace JhonnySe.Models.GitHub
         public int watchers { get; set; }
         public string default_branch { get; set; }
     }
-
     public class Owner
     {
         public string login { get; set; }

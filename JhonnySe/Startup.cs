@@ -27,6 +27,7 @@ namespace JhonnySe
             services.AddSingleton<ISecretsRepository, SecretsRepository>();
             services.AddScoped<IGitHubRepository, GitHubRepository>();
             services.AddScoped<ILinkedinRepository, LinkedinRepository>();
+            services.AddSingleton<IBlobStorageClient, BlobStorageClient>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

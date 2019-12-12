@@ -1,12 +1,11 @@
-﻿body {
+body {
   width: 100vw;
   height: 100vh;
   Margin: 0; }
-  body div div#avatar {
-    display: inline-block;
+  body div#avatar {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center; }
-    body div div#avatar img {
-      opacity: 0;
-      width: 250px; }
+    body div#avatar h1 {
+      color: aliceblue;
+      padding: 1em; }

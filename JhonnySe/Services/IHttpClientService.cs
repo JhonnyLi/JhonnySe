@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -14,9 +12,7 @@ namespace JhonnySe.Services
         void SetHeader(string key, string value);
         void SetHeaders(Dictionary<string, string> headers);
         void ClearHeaders();
-
         void SetAuthHeader(string token);
-
         void SetBasicAuthHeader(string clientId, string clientSecret);
     }
 }
