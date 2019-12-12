@@ -3,15 +3,14 @@
     height: 100vh;
     Margin: 0;
 
-    div div#avatar {
-        display: inline-block;
+    div#avatar {
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
+        h1{
+            color:aliceblue;
+            padding:1em;
 
-        img {
-            opacity:0;
-            width:250px;
         }
     }
 }

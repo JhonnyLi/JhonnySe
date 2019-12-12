@@ -1,6 +1,7 @@
 ﻿using JhonnySe.Models.GitHub;
 using JhonnySe.Repositorys;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -17,26 +18,29 @@ namespace JhonnySe.Controllers
             _linkedIn = linkedIn;
             _storage = storage;
         }
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var model = await GetViewModel();
-            var content = BlobStorageClient.CreateMemoryStreamFromObject<MainViewModel>(model);
-            //await _storage.UploadStream("Test", content);
-            //model = null;
-            //model = _storage.GetBlob<MainViewModel>();
-            return View(model);
+            return View();
         }
         [HttpGet]
         public IActionResult ValidationEndpoint(string challengeCode)
         {
-            return Ok("");
+            return Ok();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetModel()
+        {
+            var model = await GetViewModel();
+            return Ok(model);
         }
 
         private async Task<MainViewModel> GetViewModel()
         {
+            //TODO: Add caching
+            var model = _storage.GetBlob<MainViewModel>();
             var user = await _gitHub.GetUser("JhonnyLi").ConfigureAwait(false);
             var result = await _gitHub.GetReposFromUser(user).ConfigureAwait(false);
-            var model = new MainViewModel();
             model.avatar_url = user.avatar_url;
             model.OwnerName = user.name;
             model.GitHubUrl = user.html_url;
@@ -45,7 +49,8 @@ namespace JhonnySe.Controllers
                 Name = r.name, 
                 CreatedDate = r.created_at, 
                 Description = r.description, 
-                UpdatedAt = r.updated_at })
+                UpdatedAt = r.updated_at
+            })
                 .OrderByDescending(d => d.UpdatedAt).ToList();
 
             return model;

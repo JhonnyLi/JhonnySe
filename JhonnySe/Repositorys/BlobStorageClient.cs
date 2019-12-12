@@ -2,10 +2,7 @@
 using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
 using Azure.Storage.Blobs.Specialized;
-using JhonnySe.Models.GitHub;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -23,7 +20,6 @@ namespace JhonnySe.Repositorys
             var connString = secrets.GetSecret("JhonnySeStorageConnectionString");
             _client = new BlobServiceClient(connString);
             _blobClient = new BlobBaseClient(connString, "jhonnysedatacontainer", "Test");
-            
         }
 
         public async Task<Response<BlobContainerClient>> CreateContainer(string containerName)

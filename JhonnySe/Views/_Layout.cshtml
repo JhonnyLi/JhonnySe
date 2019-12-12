@@ -1,13 +1,17 @@
 ﻿<!DOCTYPE html>
 
-<html>
+<html ng-app="jhonnyApp">
 <head>
+    <link rel="shortcut icon" href="~/favicon.ico" />
+    <script src="~/Scripts/angular/angular.js"></script>
+    <script src="~/Scripts/app.js"></script>
     <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
+    <title>Just another developer page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="~/Css/Bundle.min.css" type="text/css" />
 </head>
 <body>
-    <div>
+    <div ng-controller="JhonnySeController as App" class="container">
         @RenderBody()
     </div>
 </body>
