@@ -8,5 +8,6 @@ namespace JhonnySe.Models.GitHub
         public DateTime CreatedDate { get; set; }
         public DateTime UpdatedAt { get; set; }
         public string Description { get; set; }
+        public string Url { get; set; }
     }
 }

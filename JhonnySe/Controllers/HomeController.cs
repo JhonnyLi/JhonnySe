@@ -49,9 +49,10 @@ namespace JhonnySe.Controllers
                 Name = r.name, 
                 CreatedDate = r.created_at, 
                 Description = r.description, 
-                UpdatedAt = r.updated_at
-            })
-                .OrderByDescending(d => d.UpdatedAt).ToList();
+                UpdatedAt = r.updated_at,
+                Url = r.html_url
+            }).OrderByDescending(d => d.UpdatedAt).ToList();
+            model.Words = new Models.Words.Sentences();
 
             return model;
         }

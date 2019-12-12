@@ -15,8 +15,8 @@
             <h5 class="card-title">{{repos.name}} ({{repos.createdDate}})</h5>
             <p class="card-text">{{repos.description}}</p>
             <p></p>
-            <a href="#" class="btn btn-primary">Go to repo...</a>
+            <a href="{{repos.url}}" class="btn btn-primary">{{model.words.goToRepo}}</a>
         </div>
     </div>
 </div>
-<div style="width:49.5%; display:inline-block;"><a href="{{model.gitHubUrl}}">GitHub Profile</a></div>
+<div><a href="{{model.gitHubUrl}}">{{model.words.gitHubProfile}}</a></div>
