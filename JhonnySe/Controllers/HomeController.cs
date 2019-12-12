@@ -1,4 +1,4 @@
-﻿using JhonnySe.Models.GitHub;
+using JhonnySe.Models.GitHub;
 using JhonnySe.Repositorys;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
