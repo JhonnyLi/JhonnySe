@@ -10,6 +10,9 @@ namespace JhonnySe.Models.GitHub
         public string OwnerName { get; set; }
         public string avatar_url { get; set; }
         public string GitHubUrl { get; set; }
+        public string LinkedInUrl { get; set; }
         public List<RepositoryViewModel> Repositorys { get; set; }
+
+        public string OauthCode { get; set; }
     }
 }
