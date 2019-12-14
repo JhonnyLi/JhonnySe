@@ -10,6 +10,9 @@
 
 <hr />
 <div id="carousel" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#carousel" data-slide-to="{{$index}}" ng-repeat="repos in model.repositorys | orderBy:'-updatedAt'" ng-class="{'active': $first}"></li>
+    </ol>
     <div class="carousel-inner">
         <div ng-repeat="repos in model.repositorys | orderBy:'-updatedAt'" class="carousel-item" ng-class="{'active': $first}">
             <div class="card">
@@ -19,8 +22,8 @@
                     <p class="card-text">{{repos.description}}</p>
                     <p></p>
                     <div class="card-buttons">
-                        <a href="{{repos.url}}" class="btn btn-primary">{{model.words.goToRepo}}</a>
-                        <img alt="GitHub last commit" class="" src="https://img.shields.io/github/last-commit/jhonnyli/{{repos.name}}">
+                        <a href="{{repos.url}}" class="btn btn-primary float-left">{{model.words.goToRepo}}</a>
+                        <img alt="GitHub last commit" class="last-commit float-right" src="https://img.shields.io/github/last-commit/jhonnyli/{{repos.name}}">
                     </div>
                 </div>
             </div>
@@ -37,5 +40,4 @@
     </a>
 </div>
 
-<hr />
 <div class="float-right"><a href="{{model.gitHubUrl}}">{{model.words.gitHubProfile}}</a></div>

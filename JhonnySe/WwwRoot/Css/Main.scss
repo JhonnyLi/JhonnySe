@@ -23,6 +23,11 @@ body {
     }
 
     #carousel {
+        ol.carousel-indicators{
+            li{
+                background-color:black;
+            }
+        }
         div.card {
             img {
                 width: 50%;
@@ -31,8 +36,12 @@ body {
 
             div.card-body {
                 div.card-buttons {
-                    width: 75%;
+                    width: 100%;
                     margin: auto;
+
+                    img.last-commit {
+                        max-width: 250px;
+                    }
                 }
             }
         }
