@@ -1,6 +1,7 @@
-﻿[
+[
   {
     "outputFile": "wwwroot/Css/Bundle.css",
-    "inputFile": "wwwroot/Css/Bundle.scss"
+    "inputFile": "wwwroot/Css/Bundle.scss",
+    "sourceMap": false
   }
 ]
