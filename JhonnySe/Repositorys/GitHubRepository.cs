@@ -10,15 +10,13 @@ namespace JhonnySe.Repositorys
 {
     public class GitHubRepository : IGitHubRepository
     {
-        readonly ISecretsRepository _secretsRepository;
         readonly string _clientId;
         readonly string _clientSecret;
         readonly HttpClient _client;
         public GitHubRepository(ISecretsRepository secrets)
         {
-            _secretsRepository = secrets;
-            _clientId = _secretsRepository.GetSecret("GitHubApiClientId");
-            _clientSecret = _secretsRepository.GetSecret("GitHubApiClientSecret");
+            _clientId = secrets.GetSecret("GitHubApiClientId");
+            _clientSecret = secrets.GetSecret("GitHubApiClientSecret");
             _client = GetClient();
         }
 

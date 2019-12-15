@@ -27,7 +27,7 @@ namespace JhonnySe.Repositorys
             return secret.Value.Value.ToString();
         }
 
-        private Uri InitializeKeyVault()
+        private static Uri InitializeKeyVault()
         {
             var kvUri = "https://" + "TimeKeeperVault" + ".vault.azure.net";
             return new Uri(kvUri);

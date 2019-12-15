@@ -18,7 +18,7 @@ namespace JhonnySe
             this.HostingEnvironment = env;
         }
 
-        public void ConfigureServices(IServiceCollection services)
+        public static void ConfigureServices(IServiceCollection services)
         {
             services.AddApplicationInsightsTelemetry();
             services.AddControllersWithViews();
@@ -30,7 +30,7 @@ namespace JhonnySe
             services.AddSingleton<IBlobStorageClient, BlobStorageClient>();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public static void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {

@@ -1,16 +1,49 @@
-﻿body {
+﻿@font-face {
+    font-family: 'unscii-16';
+    src: url('../Fonts/unscii-16-full.woff') format('woff'), /* Modern Browsers */
+    url('../Fonts/unscii-16-full.ttf') format('truetype'); /* Safari, Android, iOS */
+}
+
+body {
+    font-family: 'unscii-16';
     width: 100vw;
     height: 100vh;
     Margin: 0;
+    background-color: aliceblue;
 
     div#avatar {
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
-        h1{
-            color:aliceblue;
-            padding:1em;
 
+        h1 {
+            color: aliceblue;
+            padding: 1em;
+        }
+    }
+
+    #carousel {
+        ol.carousel-indicators{
+            li{
+                background-color:black;
+            }
+        }
+        div.card {
+            img {
+                width: 50%;
+                margin: auto;
+            }
+
+            div.card-body {
+                div.card-buttons {
+                    width: 100%;
+                    margin: auto;
+
+                    img.last-commit {
+                        max-width: 250px;
+                    }
+                }
+            }
         }
     }
 }
