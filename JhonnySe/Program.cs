@@ -10,7 +10,7 @@ namespace JhonnySe
 {
     public class Program
     {
-        public static void Main(string[] args)
+        protected static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
         }
@@ -23,8 +23,6 @@ namespace JhonnySe
                 {
                     if (context.HostingEnvironment.IsProduction())
                     {
-                        var builtConfig = config.Build();
-
                         var azureServiceTokenProvider = new AzureServiceTokenProvider();
                         var keyVaultClient = new KeyVaultClient(
                         new KeyVaultClient.AuthenticationCallback(

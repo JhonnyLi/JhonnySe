@@ -14,7 +14,6 @@ namespace JhonnySe.Repositorys
     {
         private readonly BlobServiceClient _client;
         private readonly BlobBaseClient _blobClient;
-        private BlobContainerClient _containerClient;
         public BlobStorageClient(ISecretsRepository secrets)
         {
             var connString = secrets.GetSecret("JhonnySeStorageConnectionString");
@@ -25,7 +24,6 @@ namespace JhonnySe.Repositorys
         public async Task<Response<BlobContainerClient>> CreateContainer(string containerName)
         {
             var response = await _client.CreateBlobContainerAsync(containerName);
-            _containerClient = response.Value;
             return response;
         }
 
@@ -41,9 +39,9 @@ namespace JhonnySe.Repositorys
 
         public async Task<Response<BlobContentInfo>> UploadStream(string blobFileName, MemoryStream stream)
         {
-            _containerClient = _client.GetBlobContainerClient("jhonnysedatacontainer");
-            var deleteResult = await _containerClient.DeleteBlobIfExistsAsync(blobFileName);
-            var response = await _containerClient.UploadBlobAsync(blobFileName, stream);
+            var containerClient = _client.GetBlobContainerClient("jhonnysedatacontainer");
+            await containerClient.DeleteBlobIfExistsAsync(blobFileName);
+            var response = await containerClient.UploadBlobAsync(blobFileName, stream);
             return response;
         }
 
