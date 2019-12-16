@@ -1,7 +1,7 @@
 using JhonnySe.Models.GitHub;
 using JhonnySe.Repositorys;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -39,20 +39,27 @@ namespace JhonnySe.Controllers
         {
             //TODO: Add caching
             var model = _storage.GetBlob<MainViewModel>();
-            var user = await _gitHub.GetUser("JhonnyLi").ConfigureAwait(false);
-            var result = await _gitHub.GetReposFromUser(user).ConfigureAwait(false);
-            model.avatar_url = user.avatar_url;
-            model.OwnerName = user.name;
-            model.GitHubUrl = user.html_url;
-            model.LinkedInUrl = _linkedIn.GetLinkedInProfileLink();
-            model.Repositorys = result.Select(r => new RepositoryViewModel { 
-                Name = r.name, 
-                CreatedDate = r.created_at, 
-                Description = r.description, 
-                UpdatedAt = r.updated_at,
-                Url = r.html_url
-            }).OrderByDescending(d => d.UpdatedAt).ToList();
-            model.Words = new Models.Words.Sentences();
+            if (model.LastUpdate.Equals(DateTime.MinValue) || model.LastUpdate.AddHours(1) < DateTime.UtcNow)
+            {
+                model.LastUpdate = DateTime.UtcNow;
+                var user = await _gitHub.GetUser("JhonnyLi").ConfigureAwait(false);
+                var result = await _gitHub.GetReposFromUser(user).ConfigureAwait(false);
+                model.avatar_url = user.avatar_url;
+                model.OwnerName = user.name;
+                model.GitHubUrl = user.html_url;
+                model.LinkedInUrl = _linkedIn.GetLinkedInProfileLink();
+                model.Repositorys = result.Select(r => new RepositoryViewModel { 
+                    Name = r.name, 
+                    CreatedDate = r.created_at, 
+                    Description = r.description, 
+                    UpdatedAt = r.updated_at,
+                    Url = r.html_url
+                }).OrderByDescending(d => d.UpdatedAt).ToList();
+                model.Words = new Models.Words.Sentences();
+
+                var uploadStream = BlobStorageClient.CreateMemoryStreamFromObject<MainViewModel>(model);
+                await _storage.UploadStream(BlobStorageClient.DefaultBlobName, uploadStream).ConfigureAwait(false);
+            }
 
             return model;
         }

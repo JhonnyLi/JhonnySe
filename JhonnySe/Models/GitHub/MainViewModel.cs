@@ -1,4 +1,5 @@
 ﻿using JhonnySe.Models.Words;
+using System;
 using System.Collections.Generic;
 
 namespace JhonnySe.Models.GitHub
@@ -11,5 +12,6 @@ namespace JhonnySe.Models.GitHub
         public string LinkedInUrl { get; set; }
         public List<RepositoryViewModel> Repositorys { get; set; }
         public Sentences Words { get; set; }
+        public DateTime LastUpdate { get; set; } = DateTime.MinValue;
     }
 }

@@ -14,11 +14,12 @@ namespace JhonnySe.Repositorys
     {
         private readonly BlobServiceClient _client;
         private readonly BlobBaseClient _blobClient;
+        public readonly static string DefaultBlobName = "Data";
         public BlobStorageClient(ISecretsRepository secrets)
         {
             var connString = secrets.GetSecret("JhonnySeStorageConnectionString");
             _client = new BlobServiceClient(connString);
-            _blobClient = new BlobBaseClient(connString, "jhonnysedatacontainer", "Test");
+            _blobClient = new BlobBaseClient(connString, "jhonnysedatacontainer", DefaultBlobName);
         }
 
         public async Task<Response<BlobContainerClient>> CreateContainer(string containerName)
